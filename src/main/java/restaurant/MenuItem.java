@@ -1,6 +1,7 @@
 package restaurant;
 
 
+import java.util.Objects;
 
 public class MenuItem {
     private String itemName;
@@ -10,7 +11,8 @@ public class MenuItem {
     private boolean isNew;
 
 
-    public MenuItem(String itemName, Double itemPrice, String itemDescription, String itemCategory, boolean isNew){
+    public MenuItem(String itemName, Double itemPrice,
+                    String itemDescription, String itemCategory, boolean isNew){
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.itemDescription = itemDescription;
@@ -56,6 +58,24 @@ public class MenuItem {
 
     public void setNew(boolean aNew) {
         isNew = aNew;
+    }
+
+    public void printItem(){
+        System.out.println(this.itemName + " | $" + this.itemPrice + " | " + this.itemDescription + " | "
+        + this.itemCategory + " | " + this.isNew);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MenuItem menuItem = (MenuItem) o;
+        return isNew == menuItem.isNew && Objects.equals(itemName, menuItem.itemName) && Objects.equals(itemPrice, menuItem.itemPrice) && Objects.equals(itemDescription, menuItem.itemDescription) && Objects.equals(itemCategory, menuItem.itemCategory);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(itemName, itemPrice, itemDescription, itemCategory, isNew);
     }
 }
 
